@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Vereesa - Home</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Flask Template Version -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/images/favicon.png') }}"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/chosen.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/pe-icon-7-stroke.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/magnific-popup.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/lightbox.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/js/fancybox/source/jquery.fancybox.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/jquery.scrollbar.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/mobile-menu.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- FontAwesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <style>
+            .btn-camera, .btn-search {
+                background: none;
+                border: none;
+                padding: 5px;
+                cursor: pointer;
+                font-size: 20px;
+                color: #333;
+            }
+            
+            .form-content .input {
+                padding: 10px;
+                border-radius: 4px 0 0 4px;
+                outline: none;
+                box-shadow: none;
+                flex-grow: 1;
+            }
+            
+            .form-content {
+                display: flex;
+                align-items: center;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 0;
+            }
+            
+            .form-content:focus-within {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+            
+            .form-search {
+                width: 100%;
+            }
+            
+            @media (max-width: 768px) {
+                .form-content {
+                    flex-direction: row;
+                }
+            
+                .btn-camera, .btn-search {
+                    font-size: 18px;
+                }
+            }
+        </style>
+    </head>
+    <body class="home">
+        <header class="header style7">
+            <div class="container">
+                <div class="main-header">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
+                            <div class="logo">
+                                <a href="/">
+                                    <img src="{{ url_for('static', filename='assets/images/logo.png')}}" alt="img">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--search bar-->
+                        <div class="col-lg-7 col-sm-8 col-md-6 col-xs-12">
+                            <div class="block-search-block">
+                                <form class="form-search form-search-width-category" method="POST" action="/search">
+                                    <div class="form-content" style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 4px;">
+                                        <input type="text" class="input form-control" name="s" placeholder="Search here" value="" style="flex-grow: 1; border: none;">
+                                        <!-- Camera icon next to the search button -->
+                                        <button type="button" class="btn-camera" data-toggle="modal" data-target="#uploadModal" style="margin-left: 10px; background: none; border: none;">
+                                            <i class="fas fa-camera"></i>
+                                        </button>
+                                        <button class="btn-search btn" type="submit" style="margin-left: 10px; background: none; border: none;">
+                                            <span class="icon-search"></span>
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Modal for Image Upload -->
+                        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="uploadModalLabel">Upload Image</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" action="/upload" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <input type="file" name="image" accept="image/*" required>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Search by Image</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--login-->
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="header-nav-container rows-space-20">
+                <div class="container">
+                    <div class="header-nav-wapper main-menu-wapper">
+                        <div class="vertical-wapper block-nav-categori">
+                            <div class="block-title">
+                                <span class="icon-bar">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="text">All Departments</span>
+                            </div>
+                            <div class="block-content verticalmenu-content">
+                                <ul class="vereesa-nav-vertical vertical-menu vereesa-clone-mobile-menu">
+                                    <li class="menu-item">
+                                        <a href="/" class="vereesa-menu-item-title" title="New Arrivals">New Arrivals</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Hot Sale" href="/" class="vereesa-menu-item-title">Hot Sale</a>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a title="Accessories" href="/" class="vereesa-menu-item-title">Accessories</a>
+                                        <span class="toggle-submenu"></span>
+                                        <ul role="menu" class=" submenu">
+                                            <li class="menu-item">
+                                                <a title="Clock" href="/" class="vereesa-item-title">Clock</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a title="Chairs" href="/" class="vereesa-item-title">Chairs</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a title="New Arrivals" href="/" class="vereesa-item-title">New Arrivals</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a title="Accessories" href="/" class="vereesa-item-title">Accessories</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a title="Storage" href="/" class="vereesa-item-title">Storage</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Chairs" href="/" class="vereesa-menu-item-title">Chairs</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Lamp" href="/" class="vereesa-menu-item-title">Lamp</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Lighting" href="/" class="vereesa-menu-item-title">Lighting</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Homewares" href="/" class="vereesa-menu-item-title">Homewares</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a title="Bottles" href="/" class="vereesa-menu-item-title">Bottles</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="header-nav">
+                            <div class="container-wapper">
+                                <ul class="vereesa-clone-mobile-menu vereesa-nav main-menu " id="menu-main-menu">
+                                    <li class="menu-item  menu-item-has-children">
+                                        <a href="/" class="vereesa-menu-item-title" title="Home">Home</a>
+                                        <span class="toggle-submenu"></span>
+                                        <ul class="submenu">
+                                            <li class="menu-item">
+                                                <a href="/">Home 01</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="home2.html">Home 02</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="home3.html">Home 03</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="gridproducts.html" class="vereesa-menu-item-title" title="Shop">Shop</a>
+                                        <span class="toggle-submenu"></span>
+                                        <ul class="submenu">
+                                            <li class="menu-item">
+                                                <a href="gridproducts.html">Grid Fullwidth</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="gridproducts_leftsidebar.html">Grid Left sidebar</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="gridproducts_bannerslider.html">Grid Bannerslider</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="listproducts.html">List</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item  menu-item-has-children item-megamenu">
+                                        <a href="/" class="vereesa-menu-item-title" title="Pages">Pages</a>
+                                        <span class="toggle-submenu"></span>
+                                        <div class="submenu mega-menu menu-page">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
+                                                    <div class="vereesa-custommenu default">
+                                                        <h2 class="widgettitle">Shop Pages</h2>
+                                                        <ul class="menu">
+                                                            <li class="menu-item">
+                                                                <a href="shoppingcart.html">Shopping Cart</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="checkout.html">Checkout</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="contact.html">Contact us</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="404page.html">404</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="login.html">Login/Register</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
+                                                    <div class="vereesa-custommenu default">
+                                                        <h2 class="widgettitle">Product</h2>
+                                                        <ul class="menu">
+                                                            <li class="menu-item">
+                                                                <a href="productdetails-fullwidth.html">Product Fullwidth</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="productdetails-leftsidebar.html">Product left sidebar</a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="productdetails-rightsidebar.html">Product right sidebar</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
+
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="menu-item  menu-item-has-children">
+                                        <a href="inblog_right-siderbar.html" class="vereesa-menu-item-title"
+                                        title="Blogs">Blogs</a>
+                                        <span class="toggle-submenu"></span>
+                                        <ul class="submenu">
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="/" class="vereesa-menu-item-title" title="Blog Style">Blog Style</a>
+                                                <span class="toggle-submenu"></span>
+                                                <ul class="submenu">
+                                                    <li class="menu-item">
+                                                        <a href="bloggrid.html">Grid</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="blogmasonry.html">Masonry</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="bloglist.html">List</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="bloglist-leftsidebar.html">List Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children">
+                                                <a href="/" class="vereesa-menu-item-title" title="Post Layout">Post Layout</a>
+                                                <span class="toggle-submenu"></span>
+                                                <ul class="submenu">
+                                                    <li class="menu-item">
+                                                        <a href="inblog_left-siderbar.html">Left Sidebar</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="inblog_right-siderbar.html">Right Sidebar</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="about.html" class="vereesa-menu-item-title" title="About">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </header>
+        <div class="header-device-mobile">
+            <div class="wapper">
+                <div class="item mobile-logo">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='assets/images/logo.png')}}" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="item item mobile-search-box has-sub">
+                    <a href="/">
+                            <span class="icon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
+                    </a>
+                    <div class="block-sub">
+                        <a href="/" class="close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                        <div class="header-searchform-box">
+                            <form class="header-searchform">
+                                <div class="searchform-wrap">
+                                    <input type="text" class="search-input" placeholder="Enter keywords to search...">
+                                    <input type="submit" class="submit button" value="Search">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="item mobile-settings-box has-sub">
+                    <a href="/">
+                            <span class="icon">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </span>
+                    </a>
+                    <div class="block-sub">
+                        <a href="/" class="close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                        <div class="block-sub-item">
+                            <h5 class="block-item-title">Currency</h5>
+                            <form class="currency-form vereesa-language">
+                                <ul class="vereesa-language-wrap">
+                                    <li class="active">
+                                        <a href="/">
+                                                <span>
+                                                    English (USD)
+                                                </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                                <span>
+                                                    French (EUR)
+                                                </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                                <span>
+                                                    Japanese (JPY)
+                                                </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="item menu-bar">
+                    <a class=" mobile-navigation  menu-toggle" href="/">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="fullwidth-template">
+                <div class="home-slider-banner rows-space-40">
+                    <div class="container">
+                        <div class="row10">
+                            <div class="col-lg-8 silider-wrapp">
+                                <div class="home-slider">
+                                    <div class="slider-owl owl-slick equal-container nav-center"
+                                        data-slick='{"autoplay":true, "autoplaySpeed":9000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
+                                        data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
+                                        <div class="slider-item style7">
+                                            <div class="slider-inner equal-element">
+                                                <div class="slider-infor">
+                                                    <h5 class="title-small">
+                                                        Sale up to 40% off!
+                                                    </h5>
+                                                    <h3 class="title-big">
+                                                        The home scandinavian
+                                                    </h3>
+                                                    <div class="price">
+                                                        New Price:
+                                                        <span class="number-price">
+                                                            €270.00
+                                                        </span>
+                                                    </div>
+                                                    <a href="/" class="button btn-browse">Browse</a>
+                                                    <a href="/" class="button btn-shop-the-look bgroud-style">Shop Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item style8">
+                                            <div class="slider-inner equal-element">
+                                                <div class="slider-infor">
+                                                    <h5 class="title-small">
+                                                        Black Friday Sale!
+                                                    </h5>
+                                                    <h3 class="title-big">
+                                                        Lighting Collection Big Sale
+                                                    </h3>
+                                                    <div class="price">
+                                                        Save Price:
+                                                        <span class="number-price">
+                                                            €170.00
+                                                        </span>
+                                                    </div>
+                                                    <a href="/" class="button btn-shop-product">Shop Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item style9">
+                                            <div class="slider-inner equal-element">
+                                                <div class="slider-infor">
+                                                    <h5 class="title-small">
+                                                        Vereesa Lamp Collection
+                                                    </h5>
+                                                    <h3 class="title-big">
+                                                        The inspiration behind our store
+                                                    </h3>
+                                                    <a href="/" class="button btn-chekout">Shop Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 banner-wrapp">
+                                <div class="banner">
+                                    <div class="item-banner style7">
+                                        <div class="inner">
+                                            <div class="banner-content">
+                                                <h3 class="title">Lighting Collection</h3>
+                                                <div class="description">
+                                                    Inspire ur lighting style with us.
+                                                </div>
+                                                <a href="/" class="button btn-lets-do-it">Shop Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner">
+                                    <div class="item-banner style8">
+                                        <div class="inner">
+                                            <div class="banner-content">
+                                                <h3 class="title">Norm Alarm Clock</h3>
+                                                <div class="description">
+                                                    Vereesa style, day by day!
+                                                </div>
+                                                <span class="price">€379.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+                <div class="vereesa-tabs  default">
+                    <div class="container">
+                        <div class="tab-head">
+                            <ul class="tab-link">
+                                <li class="active">
+                                    <a data-toggle="tab" aria-expanded="true" href="/bestseller">Bestseller</a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" aria-expanded="true" href="/new_arrivals">New Arrivals </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" aria-expanded="true" href="/top-rated">Top Rated</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-container">
+                            <div id="bestseller" class="tab-panel active">
+
+                                <!-- product listing -->
+                                <div class="vereesa-product">
+                                    <ul class="row list-products auto-clear equal-container product-grid">
+                                        {% for product in products %}
+                                        <li class="product-item col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                            <div class="product-inner equal-element">
+                                                <div class="product-top">
+                                                    <div class="flash">
+                                                        <span class="onnew"><span class="text">new</span></span>
+                                                    </div>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="/">Add to Wishlist</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-thumb">
+                                                    <div class="thumb-inner">
+                                                        <a href="{{ product.product_url }}" target="_blank">
+                                                            <img src="{{ product.img_src }}" alt="{{ product.title }}" style="width: 200px; height: 200px; object-fit: cover;">
+                                                        </a>
+                                                    </div>
+                                                    <!--
+                                                    <a href="{{ product.product_url }}" target="_blank" class="button quick-wiew-button">Quick View</a>
+                                                    -->
+                                                    <a href="{{ product.product_url }}" target="_blank" class="button">Quick View</a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <h5 class="product-name product_title">
+                                                        <a href="{{ product.product_url }}" target="_blank">{{ product.title }}</a>
+                                                    </h5>
+                                                    <div class="group-info">
+                                                        <div class="site-name">
+                                                            <span>Site: {{ product.site }}</span>
+                                                        </div>
+                                                        <div class="price">
+                                                            <ins>{{ product.price }}</ins>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer style7">
+            <div class="container">
+                <div class="container-wapper">
+                    <div class="row">
+                        <div class="box-footer col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                            <div class="widget-box">
+                                <div class="single-img">
+                                    <a href="/"><img src="{{ url_for('static', filename='assets/images/logo.png')}}" alt="img"></a>
+                                </div>
+                                <div class="text-content-elememnt">
+                                    <p>
+                                        Shop the latest products right from
+                                        your home .
+                                    </p>
+                                    <p>We have furniture supplies & accessories from top brands.</p>
+                                </div>
+                            </div>
+                            <div class="vereesa-socials">
+                                <ul class="socials">
+                                    <li>
+                                        <a href="/" class="social-item" target="_blank">
+                                            <i class="icon fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="social-item" target="_blank">
+                                            <i class="icon fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="social-item" target="_blank">
+                                            <i class="icon fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box-footer col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                            <div class="vereesa-newsletter style1">
+                                <div class="newsletter-head">
+                                    <h3 class="title">Newsletter</h3>
+                                </div>
+                                <div class="newsletter-form-wrap">
+                                    <div class="list">
+                                        Get notified of new products, limited releases, and more.
+                                    </div>
+                                    <input type="email" class="input-text email email-newsletter"
+                                        placeholder="Your email letter">
+                                    <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 border-custom">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="footer-device-mobile">
+            <div class="wapper">
+                <div class="footer-device-mobile-item device-home">
+                    <a href="/">
+                        <span class="icon">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                        Home
+                    </a>
+                </div>
+                <div class="footer-device-mobile-item device-home device-wishlist">
+                    <a href="/">
+                        <span class="icon">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </span>
+                        Wishlist
+                    </a>
+                </div>
+                <div class="footer-device-mobile-item device-home device-cart">
+                    <a href="/">
+                        <span class="icon">
+                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                            <span class="count-icon">
+                                0
+                            </span>
+                        </span>
+                        <span class="text">Cart</span>
+                    </a>
+                </div>
+                <div class="footer-device-mobile-item device-home device-user">
+                    <a href="login.html">
+                        <span class="icon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        Account
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="backtotop">
+            <i class="pe-7s-angle-up"></i>
+        </a>
+        <!-- Flask Template Version -->
+        <script src="{{ url_for('static', filename='assets/js/jquery-1.12.4.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.plugin-countdown.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery-countdown.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/magnific-popup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/isotope.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.scrollbar.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery-ui.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/mobile-menu.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/chosen.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/slick.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.elevateZoom.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.actual.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/fancybox/source/jquery.fancybox.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lightbox.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/owl.thumbs.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.scrollbar.min.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM"></script>
+        <script src="{{ url_for('static', filename='assets/js/frontend-plugin.js') }}"></script>
+        <!-- Bootstrap JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
