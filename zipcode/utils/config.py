@@ -1,6 +1,13 @@
 import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-API_KEY = "***REMOVED***"
+load_dotenv()
+
+# ✅ Gemini ke liye API key environment se lo
+API_KEY = os.getenv("GOOGLE_API_KEY")
+
+# ✅ Configure Gemini
 genai.configure(api_key=API_KEY)
 
 def upload_to_gemini(path, mime_type=None):

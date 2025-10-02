@@ -5,7 +5,16 @@ import os
 import threading
 # app = Flask(__name__)
 from quart import Quart, request, render_template, redirect, url_for
+from dotenv import load_dotenv
 app = Quart(__name__)
+# .env file load karna
+load_dotenv()
+
+# Gemini ke liye key
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+# Maps ke liye key
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 # Define a temporary upload folder
 UPLOAD_FOLDER = 'uploads/'
 if not os.path.exists(UPLOAD_FOLDER):
@@ -139,7 +148,8 @@ async def search():
     # filtered_products = [product for product in products if query in product['title'].lower()]
     results = await text_search(search_text=query)
     # Render the template with the filtered products
-    return await render_template('index.html', products=results)
+    return await render_template('old.html', products=results, google_api_key=GOOGLE_MAPS_API_KEY)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
